@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<title>VJ Project &amp; IT Solution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#181818;
+    --blue:#E1503E;
+    --blue-deep:#C13B2C;
+    --teal:#DB7B22;
+    --bg:#FFFFFF;
+    --bg-soft:#F4F7FB;
+    --line:#E4E9F0;
+    --text:#16233B;
+    --text-dim:#5B6B84;
+    --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Inter', sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.jakarta{font-family:'Plus Jakarta Sans', sans-serif;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  img,svg{display:block;}
+  ::selection{background:var(--blue); color:#fff;}
+  @media (prefers-reduced-motion: reduce){*{animation:none !important; transition:none !important;}}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--blue); outline-offset:2px;
+  }
+
+  /* ---------- nav ---------- */
+  header{position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .navrow{display:flex; align-items:center; justify-content:space-between; height:78px;}
+  .brand{display:flex; align-items:flex-end; gap:10px;}
+  .brand-mark{
+    width:42px; height:42px; border-radius:10px;
+    background:linear-gradient(135deg, var(--blue), var(--teal));
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:800; font-size:15px; font-family:'Plus Jakarta Sans', sans-serif; flex-shrink:0;
+  }
+  .logo-mark{position:relative; line-height:1; padding-top:2px;}
+  .logo-vj{font-family:'Playfair Display', serif; font-weight:900; font-size:27px; color:#151515; letter-spacing:-0.01em;}
+  .logo-swoosh{display:block; width:44px; height:9px; margin-top:-4px;}
+  .brand-text{font-weight:800; font-size:14px; letter-spacing:0.04em; color:#151515; line-height:1.3;}
+  .logo-solution{display:block; font-size:10.5px; font-weight:700; letter-spacing:0.14em; color:var(--teal); margin-top:1px;}
+  .brand-text span:not(.logo-solution){display:block; font-size:11.5px; color:var(--text-dim); font-weight:500; margin-top:2px;}
+  nav.links{display:flex; align-items:center; gap:2px;}
+  nav.links a{font-size:14.5px; font-weight:600; padding:10px 16px; border-radius:8px; color:var(--text-dim); transition:color .15s ease, background .15s ease;}
+  nav.links a:hover{color:var(--navy); background:var(--bg-soft);}
+  nav.links a.active{color:var(--blue);}
+  .call-pill{display:flex; align-items:center; gap:8px; background:var(--navy); color:#fff; border-radius:24px; padding:10px 18px; font-size:13.5px; font-weight:600;}
+  .hamburger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;}
+  .hamburger span{width:22px; height:2px; background:var(--navy);}
+  .mobile-menu{display:none; flex-direction:column; padding:8px 32px 20px; border-bottom:1px solid var(--line); background:#fff;}
+  .mobile-menu a{padding:13px 4px; border-bottom:1px solid var(--line); font-size:14.5px; font-weight:600; color:var(--text-dim);}
+  .mobile-menu a.active{color:var(--blue);}
+  .mobile-menu.open{display:flex;}
+
+  /* ---------- page transitions ---------- */
+  .page{display:none; animation:rise .45s ease both;}
+  .page.visible{display:block;}
+  @keyframes rise{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow{font-size:13px; font-weight:700; letter-spacing:0.06em; color:var(--blue); text-transform:uppercase; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  .eyebrow::before{content:''; width:18px; height:2px; background:var(--teal); border-radius:2px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:84px 0 76px; background:linear-gradient(180deg, var(--bg-soft) 0%, #fff 100%);}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;}
+  h1.display{font-weight:800; font-size:clamp(32px,4.2vw,50px); line-height:1.15; color:var(--navy); letter-spacing:-0.01em;}
+  h1.display span{color:var(--blue);}
+  .hero p.lede{margin-top:20px; font-size:16.5px; color:var(--text-dim); max-width:48ch;}
+  .cta-row{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .btn{font-family:'Plus Jakarta Sans', sans-serif; font-weight:700; font-size:14.5px; padding:14px 26px; border-radius:8px; cursor:pointer; border:1px solid transparent; display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, box-shadow .15s ease, background .15s ease;}
+  .btn-primary{background:var(--blue); color:#fff; box-shadow:0 10px 24px -8px rgba(29,92,196,0.5);}
+  .btn-primary:hover{background:var(--blue-deep); transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--line); color:var(--navy); background:#fff;}
+  .btn-ghost:hover{border-color:var(--blue); color:var(--blue);}
+  .trust-row{display:flex; gap:26px; margin-top:36px; flex-wrap:wrap;}
+  .trust-item{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-dim); font-weight:600;}
+  .trust-item .ic{width:18px; height:18px; flex-shrink:0;}
+
+  /* ---------- hero visual ---------- */
+  .hero-visual{background:#fff; border:1px solid var(--line); border-radius:16px; padding:28px; box-shadow:0 30px 60px -24px rgba(19,42,78,0.22); position:relative;}
+  .hv-row{display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .hv-row:last-child{border-bottom:none;}
+  .hv-icon{width:44px; height:44px; border-radius:10px; background:var(--bg-soft); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .hv-icon svg{width:22px; height:22px;}
+  .hv-title{font-weight:700; font-size:14.5px; color:var(--navy);}
+  .hv-sub{font-size:12.5px; color:var(--text-dim); margin-top:2px;}
+  .hv-badge{margin-left:auto; font-size:11px; font-weight:700; padding:5px 10px; border-radius:20px; background:#E7F5EE; color:#1E8A5F; flex-shrink:0;}
+
+  /* ---------- stats ---------- */
+  .stats{border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:grid; grid-template-columns:repeat(4,1fr);}
+  .stat{padding:32px; border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Plus Jakarta Sans', sans-serif; font-size:26px; font-weight:800; color:var(--navy);}
+  .stat .lbl{font-size:13px; color:var(--text-dim); margin-top:6px;}
+
+  /* ---------- sections ---------- */
+  section{padding:80px 0;}
+  h2.section-title{font-weight:800; font-size:clamp(24px,3vw,32px); color:var(--navy); margin-bottom:14px; letter-spacing:-0.01em;}
+  .section-sub{color:var(--text-dim); max-width:58ch; margin-bottom:46px; font-size:15.5px;}
+
+  /* ---------- service cards ---------- */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .svc-card{background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;}
+  .svc-card:hover{box-shadow:0 20px 40px -20px rgba(19,42,78,0.25); transform:translateY(-4px); border-color:#D6E2F5;}
+  .svc-icon{width:52px; height:52px; border-radius:12px; background:var(--bg-soft); display:flex; align-items:center; justify-content:center; margin-bottom:18px;}
+  .svc-icon svg{width:26px; height:26px;}
+  .svc-title{font-weight:700; font-size:17.5px; color:var(--navy); margin-bottom:10px;}
+  .svc-desc{font-size:14px; color:var(--text-dim);}
+  .svc-list{margin-top:16px; list-style:none; font-size:13.5px;}
+  .svc-list li{padding:6px 0; padding-left:22px; position:relative; color:var(--text);}
+  .svc-list li::before{content:''; position:absolute; left:0; top:12px; width:8px; height:8px; border-radius:2px; background:var(--teal);}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:60px; align-items:center;}
+  .about-visual{aspect-ratio:4/5; border-radius:16px; background:linear-gradient(150deg, var(--navy) 0%, var(--blue) 60%, var(--teal) 130%); position:relative; overflow:hidden; box-shadow:0 30px 60px -26px rgba(19,42,78,0.4);}
+  .about-visual svg{position:absolute; inset:0; width:100%; height:100%;}
+  .fact-panel{border:1px solid var(--line); border-radius:14px; padding:8px 24px; margin-top:28px;}
+  .fact-row{display:flex; justify-content:space-between; gap:20px; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-row .k{color:var(--text-dim); font-weight:600; font-size:13.5px; flex-shrink:0;}
+  .fact-row .v{text-align:right; font-weight:600; color:var(--navy);}
+
+  /* ---------- project request form ---------- */
+  .project-form-card{background:var(--bg-soft); border:1px solid var(--line); border-radius:16px; padding:40px; margin-top:8px;}
+  .pf-head{max-width:60ch; margin-bottom:8px;}
+  .pf-grid{display:grid; grid-template-columns:1fr 1fr; gap:0 24px; margin-top:24px;}
+  .radio-row{display:flex; flex-direction:column; gap:10px; margin-top:4px;}
+  .radio-opt{display:flex; align-items:flex-start; gap:10px; font-size:14px; font-weight:600; color:var(--text); background:#fff; border:1px solid var(--line); border-radius:8px; padding:12px 14px; cursor:pointer;}
+  .radio-opt input{margin-top:3px; accent-color:var(--blue); flex-shrink:0;}
+  .radio-opt em{display:block; font-style:normal; font-weight:400; color:var(--text-dim); font-size:12.5px; margin-top:2px;}
+  @media (max-width:700px){ .pf-grid{grid-template-columns:1fr;} .project-form-card{padding:26px;} }
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px;}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-size:13px; font-weight:700; color:var(--navy); margin-bottom:8px;}
+  .field input, .field textarea, .field select{
+    width:100%; background:var(--bg-soft); border:1px solid var(--line); border-radius:8px;
+    padding:13px 14px; color:var(--text); font-family:'Inter', sans-serif; font-size:14.5px;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{background:#fff;}
+  .field textarea{resize:vertical; min-height:110px;}
+  .contact-info-card{border:1px solid var(--line); border-radius:14px; padding:28px; background:var(--bg-soft);}
+  .info-line{display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .info-line:last-child{border-bottom:none;}
+  .info-line .ic{width:38px; height:38px; border-radius:9px; background:#fff; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .info-line .ic svg{width:18px; height:18px;}
+  .info-line .k{font-size:12px; color:var(--text-dim); font-weight:600; text-transform:uppercase; letter-spacing:0.03em;}
+  .info-line .v{font-weight:600; color:var(--navy); margin-top:2px;}
+  .form-note{margin-top:14px; font-size:12.5px; color:var(--text-dim);}
+  .avail-card{margin-top:24px; border-radius:14px; padding:22px 24px; background:linear-gradient(135deg, var(--navy), var(--blue-deep)); color:#fff;}
+  .avail-card .k{font-size:12px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.75;}
+  .avail-card .big{font-family:'Plus Jakarta Sans', sans-serif; font-size:19px; font-weight:800; margin-top:6px;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy); color:#C9D4E6; padding:52px 0 34px;}
+  .foot-row{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:26px;}
+  footer .brand-text{color:#fff;}
+  footer .brand-text span:not(.logo-solution){color:#8FA3C4;}
+  .foot-links{display:flex; gap:24px; font-size:14px;}
+  .foot-links a:hover{color:#fff;}
+  .copyright{font-size:12.5px; color:#7C8FB0; margin-top:32px; border-top:1px solid rgba(255,255,255,0.1); padding-top:22px;}
+
+  @media (max-width:880px){
+    nav.links, .call-pill{display:none;}
+    .hamburger{display:flex;}
+    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .grid-3{grid-template-columns:1fr 1fr;}
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .stat{border-bottom:1px solid var(--line);}
+    .wrap{padding:0 20px;}
+  }
+  @media (max-width:560px){
+    .grid-3{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap navrow">
+    <div class="brand">
+      <div class="logo-mark">
+        <span class="logo-vj">VJ</span>
+        <svg class="logo-swoosh" viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M2 15C30 2 70 2 98 15" fill="none" stroke="#E1503E" stroke-width="3" stroke-linecap="round"/></svg>
+      </div>
+      <div class="brand-text">PROJECT&amp;IT<span class="logo-solution">SOLUTION</span></div>
+    </div>
+    <nav class="links" id="desktopNav">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#services" data-page="services">Services</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#contact" data-page="contact">Contact</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="call-pill">+91 87781 18782</div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" data-page="home">Home</a>
+    <a href="#services" data-page="services">Services</a>
+    <a href="#about" data-page="about">About</a>
+    <a href="#contact" data-page="contact">Contact</a>
+  </div>
+</header>
+
+<!-- ============ HOME ============ -->
+<main class="page" id="page-home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Web · App · Student Projects · IT &amp; Laptop Service</p>
+        <h1 class="display">Reliable IT solutions, <span>built and fixed right</span></h1>
+        <p class="lede">VJ Project &amp; IT Solution delivers websites, apps, and final-year student projects, plus dependable IT support and laptop repair — all from one local desk in Gudiyatham.</p>
+        <div class="cta-row">
+          <a href="#services" class="btn btn-primary" data-page="services">Explore services</a>
+          <a href="#contact" class="btn btn-ghost" data-page="contact">Get in touch</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#DB7B22" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Direct client contact</div>
+          <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#DB7B22" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Local, on-site visits</div>
+          <div class="trust-item"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#DB7B22" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Documented delivery</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hv-row">
+          <div class="hv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><div class="hv-title">Website Development</div><div class="hv-sub">Business &amp; portfolio sites</div></div>
+          <div class="hv-badge">Available</div>
+        </div>
+        <div class="hv-row">
+          <div class="hv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div><div class="hv-title">App Development</div><div class="hv-sub">Android app builds</div></div>
+          <div class="hv-badge">Available</div>
+        </div>
+        <div class="hv-row">
+          <div class="hv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+          <div><div class="hv-title">Student Projects</div><div class="hv-sub">Final-year &amp; mini projects</div></div>
+          <div class="hv-badge">Available</div>
+        </div>
+        <div class="hv-row">
+          <div class="hv-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></div>
+          <div><div class="hv-title">Laptop Service</div><div class="hv-sub">Repair &amp; performance fixes</div></div>
+          <div class="hv-badge">Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">5</div><div class="lbl">Core services, one team</div></div>
+      <div class="stat"><div class="num">1:1</div><div class="lbl">Direct client communication</div></div>
+      <div class="stat"><div class="num">Local</div><div class="lbl">Based in Gudiyatham, Vellore Dt.</div></div>
+      <div class="stat"><div class="num">Fast</div><div class="lbl">Same-day response on enquiries</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">What we do</p>
+      <h2 class="section-title">Services built around what you actually need</h2>
+      <p class="section-sub">From a business website to a laptop that won't boot — every job is scoped clearly and delivered with a working handover.</p>
+      <div class="grid-3">
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="svc-title">Web Development</div>
+          <p class="svc-desc">Responsive, fast-loading websites for businesses and portfolios.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div class="svc-title">App Development</div>
+          <p class="svc-desc">Android apps built for a clear, specific purpose.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+          <div class="svc-title">Student Project Development</div>
+          <p class="svc-desc">Final-year and mini projects, built and documented for review.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M9 3h6l1 4H8l1-4z"/><path d="M4 7h16l-1.5 13a2 2 0 01-2 2H7.5a2 2 0 01-2-2L4 7z"/></svg></div>
+          <div class="svc-title">IT Support</div>
+          <p class="svc-desc">Setup, troubleshooting, and upkeep for home and office systems.</p>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></div>
+          <div class="svc-title">Laptop Service</div>
+          <p class="svc-desc">Hardware and software repair, servicing, and performance fixes.</p>
+        </div>
+        <div class="svc-card" style="display:flex; flex-direction:column; justify-content:center; background:var(--bg-soft); border-style:dashed;">
+          <div class="svc-title" style="margin-bottom:8px;">Need something specific?</div>
+          <p class="svc-desc" style="margin-bottom:16px;">Tell us the job — we'll scope it for you.</p>
+          <a href="#contact" class="btn btn-primary" data-page="contact" style="width:fit-content;">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ SERVICES ============ -->
+<main class="page" id="page-services">
+  <section style="padding-top:56px;">
+    <div class="wrap">
+      <p class="eyebrow">Services</p>
+      <h2 class="section-title">Everything on offer, in detail</h2>
+      <p class="section-sub">What's included and how each service is delivered.</p>
+      <div class="grid-3" style="grid-template-columns:repeat(2,1fr);">
+
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div class="svc-title">Web Development</div>
+          <p class="svc-desc">Custom websites for businesses, portfolios, and organisations — designed, built, and handed over ready to run.</p>
+          <ul class="svc-list">
+            <li>Responsive design, mobile to desktop</li>
+            <li>Business, portfolio &amp; e-commerce sites</li>
+            <li>Hosting &amp; domain setup guidance</li>
+            <li>Post-launch fixes included</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <div class="svc-title">App Development</div>
+          <p class="svc-desc">Mobile apps built for a clear purpose — from client-facing tools to campus utility apps.</p>
+          <ul class="svc-list">
+            <li>Android app builds</li>
+            <li>UI/UX matched to the brief</li>
+            <li>API &amp; database integration</li>
+            <li>Play Store submission support</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
+          <div class="svc-title">Student Project Development</div>
+          <p class="svc-desc">Final-year and mini projects across CS/IT domains — built with real code, not templates, and documented for review.</p>
+          <ul class="svc-list">
+            <li>Python, web, and AI/ML based projects</li>
+            <li>Full report &amp; documentation</li>
+            <li>Viva / defence preparation support</li>
+            <li>Guidance on custom project ideas</li>
+          </ul>
+        </div>
+
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M9 3h6l1 4H8l1-4z"/><path d="M4 7h16l-1.5 13a2 2 0 01-2 2H7.5a2 2 0 01-2-2L4 7z"/></svg></div>
+          <div class="svc-title">IT Support</div>
+          <p class="svc-desc">On-call and on-site support for systems that need to just keep working.</p>
+          <ul class="svc-list">
+            <li>OS install &amp; software setup</li>
+            <li>Network &amp; printer configuration</li>
+            <li>Virus &amp; malware cleanup</li>
+            <li>Ongoing maintenance visits</li>
+          </ul>
+        </div>
+
+        <div class="svc-card" style="grid-column:1/-1;">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></div>
+          <div class="svc-title">Laptop Service</div>
+          <p class="svc-desc">Hardware and software repair for laptops — screen, keyboard, battery, and performance issues diagnosed and fixed.</p>
+          <ul class="svc-list">
+            <li>Hardware diagnosis &amp; repair</li>
+            <li>OS reinstall &amp; data recovery</li>
+            <li>Speed &amp; performance servicing</li>
+            <li>Genuine part sourcing on request</li>
+          </ul>
+        </div>
+
+      </div>
+      <div style="margin-top:44px;">
+        <a href="#contact" class="btn btn-primary" data-page="contact">Request a service</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="wrap">
+      <div class="project-form-card">
+        <div class="pf-head">
+          <p class="eyebrow" style="margin-bottom:8px;">Student Project Development</p>
+          <h2 class="section-title" style="margin-bottom:8px;">Request your project</h2>
+          <p class="section-sub" style="margin-bottom:0;">Fill this in and it goes straight to WhatsApp — scoped clearly from the first message.</p>
+        </div>
+
+        <form id="projectForm" class="pf-grid">
+          <div class="field">
+            <label for="pname">Full name</label>
+            <input id="pname" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="pphone">Phone number</label>
+            <input id="pphone" type="tel" placeholder="10-digit mobile number" required>
+          </div>
+
+          <div class="field" style="grid-column:1/-1;">
+            <label for="ptitle">Project title</label>
+            <input id="ptitle" type="text" placeholder="e.g. Smart Attendance System using Face Recognition, or leave blank if you need topic ideas">
+          </div>
+
+          <div class="field">
+            <label for="pcategory">Category</label>
+            <select id="pcategory">
+              <option>Web Application</option>
+              <option>Mobile App</option>
+              <option>Desktop Application</option>
+              <option>Machine Learning / AI</option>
+              <option>IoT / Hardware-based</option>
+              <option>Not sure — need guidance</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="planguage">Language / tech stack</label>
+            <input id="planguage" type="text" placeholder="e.g. Python, Java, PHP, React">
+          </div>
+
+          <div class="field" style="grid-column:1/-1;">
+            <label>Project type</label>
+            <div class="radio-row">
+              <label class="radio-opt"><input type="radio" name="ptype" value="Readymade (modified)" checked><span>Readymade <em>— existing base project, modified</em></span></label>
+              <label class="radio-opt"><input type="radio" name="ptype" value="Custom (built from scratch)"><span>Custom <em>— built from scratch for your brief</em></span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="pdeadline">Deadline / viva date</label>
+            <input id="pdeadline" type="date">
+          </div>
+          <div class="field">
+            <label for="pbudget">Budget range</label>
+            <select id="pbudget">
+              <option>Under ₹2,000</option>
+              <option>₹2,000 – ₹5,000</option>
+              <option>₹5,000 – ₹10,000</option>
+              <option>Above ₹10,000</option>
+              <option>Need a quote</option>
+            </select>
+          </div>
+
+          <div class="field" style="grid-column:1/-1;">
+            <label>Documentation needed</label>
+            <div class="radio-row">
+              <label class="radio-opt"><input type="checkbox" value="Project Report"><span>Project report</span></label>
+              <label class="radio-opt"><input type="checkbox" value="PPT"><span>PPT</span></label>
+              <label class="radio-opt"><input type="checkbox" value="Full documentation (chapters, UML, test cases)"><span>Full documentation</span></label>
+            </div>
+          </div>
+
+          <div class="field" style="grid-column:1/-1;">
+            <label for="pdetails">Anything else</label>
+            <textarea id="pdetails" placeholder="Department, guide requirements, or any specific features"></textarea>
+          </div>
+
+          <div style="grid-column:1/-1;">
+            <button type="submit" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.4-.1-.6.1-.2.3-.7 1-.8 1.1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.1.2-.3.3-.4.1-.2 0-.4 0-.5C11.6 9 11.1 7.8 10.9 7.3c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.5-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.2 4.9 1.2h.1c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2h-.1c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.1 15.1 3.7 13.6 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8.3-8.3 8.3z"/></svg>
+              Send project request via WhatsApp
+            </button>
+            <p class="form-note">Opens WhatsApp with everything filled in — sent straight to +91 87781 18782.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ ABOUT ============ -->
+<main class="page" id="page-about">
+  <section style="padding-top:56px;">
+    <div class="wrap about-grid">
+      <div class="about-visual">
+        <svg viewBox="0 0 300 375" fill="none">
+          <!-- laptop -->
+          <rect x="62" y="150" width="176" height="112" rx="8" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+          <rect x="76" y="163" width="148" height="86" rx="4" fill="rgba(0,0,0,0.18)"/>
+          <!-- code lines on screen -->
+          <text x="86" y="182" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.85)">&lt;div&gt;</text>
+          <text x="98" y="196" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.6)">function()</text>
+          <text x="98" y="210" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.6)">return true;</text>
+          <text x="86" y="224" font-family="monospace" font-size="10" fill="rgba(255,255,255,0.85)">&lt;/div&gt;</text>
+          <rect x="86" y="232" width="52" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+          <!-- laptop base -->
+          <path d="M50 262 L250 262 L238 276 L62 276 Z" fill="rgba(255,255,255,0.16)"/>
+
+          <!-- gear icon: IT support -->
+          <g transform="translate(46,72)">
+            <circle cx="0" cy="0" r="20" fill="rgba(255,255,255,0.14)" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+            <path d="M0 -9v18M-9 0h18M-6.4 -6.4l12.8 12.8M-6.4 6.4l12.8 -12.8" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+            <circle cx="0" cy="0" r="5" fill="rgba(255,255,255,0.7)"/>
+          </g>
+
+          <!-- graduation cap: student projects -->
+          <g transform="translate(252,90)">
+            <path d="M-22 0 L0 -10 L22 0 L0 10 Z" fill="rgba(255,255,255,0.7)"/>
+            <path d="M-11 5 v10 c0 4 22 4 22 0 v-10" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none"/>
+            <line x1="18" y1="2" x2="18" y2="18" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"/>
+          </g>
+
+          <!-- wrench: repair -->
+          <g transform="translate(252,300) rotate(45)">
+            <rect x="-4" y="-22" width="8" height="30" rx="3" fill="rgba(255,255,255,0.7)"/>
+            <circle cx="0" cy="-24" r="9" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="3"/>
+          </g>
+
+          <!-- connecting dots -->
+          <circle cx="46" cy="72" r="2.5" fill="rgba(255,255,255,0.5)"/>
+          <circle cx="252" cy="90" r="2.5" fill="rgba(255,255,255,0.5)"/>
+          <path d="M62 92 L120 152" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <path d="M236 110 L188 152" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="3 4"/>
+        </svg>
+      </div>
+      <div>
+        <p class="eyebrow">About us</p>
+        <h2 class="section-title">A local IT desk, run with real accountability</h2>
+        <p style="color:var(--text-dim); font-size:15.5px; margin-bottom:14px;">VJ Project &amp; IT Solution operates out of Gudiyatham, Vellore District — built to bridge two needs at once: students who need a final-year project that actually works when it's demoed, and local homes and small offices who need a laptop fixed or a system set up without a long wait.</p>
+        <p style="color:var(--text-dim); font-size:15.5px;">Every job — a website, an app, a project report, or a laptop on the bench — is scoped clearly, worked on directly, and only marked complete once it's actually delivered and working.</p>
+
+        <div class="fact-panel">
+          <div class="fact-row"><span class="k">Based in</span><span class="v">Gudiyatham, Vellore, Tamil Nadu</span></div>
+          <div class="fact-row"><span class="k">Focus areas</span><span class="v">Web, apps, student projects, IT &amp; laptop service</span></div>
+          <div class="fact-row"><span class="k">Approach</span><span class="v">Direct client contact, no outsourcing</span></div>
+          <div class="fact-row"><span class="k">Availability</span><span class="v">Local visits &amp; remote support</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ CONTACT ============ -->
+<main class="page" id="page-contact">
+  <section style="padding-top:56px;">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 class="section-title">Get in touch</h2>
+        <p class="section-sub">Tell us what you need — we'll get back with scope and timeline.</p>
+        <form id="contactForm">
+          <div class="field">
+            <label for="fname">Full name</label>
+            <input id="fname" type="text" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="fphone">Phone number</label>
+            <input id="fphone" type="tel" placeholder="10-digit mobile number" required>
+          </div>
+          <div class="field">
+            <label for="fservice">Service needed</label>
+            <select id="fservice">
+              <option>Web Development</option>
+              <option>App Development</option>
+              <option>Student Project Development</option>
+              <option>IT Support</option>
+              <option>Laptop Service</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fmsg">Details</label>
+            <textarea id="fmsg" placeholder="Briefly describe what you need"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.4-.1-.6.1-.2.3-.7 1-.8 1.1-.2.2-.3.2-.5.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.1.2-.3.3-.4.1-.2 0-.4 0-.5C11.6 9 11.1 7.8 10.9 7.3c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.4.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.5-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.2 4.9 1.2h.1c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2h-.1c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3C4.1 15.1 3.7 13.6 3.7 12c0-4.6 3.7-8.3 8.3-8.3s8.3 3.7 8.3 8.3-3.7 8.3-8.3 8.3z"/></svg>
+            Send via WhatsApp
+          </button>
+          <p class="form-note">Opens WhatsApp with your details filled in — sent straight to +91 87781 18782.</p>
+        </form>
+      </div>
+      <div>
+        <div class="contact-info-card">
+          <div class="info-line">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.12.9.35 1.78.68 2.61a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.47-1.27a2 2 0 012.11-.45c.83.33 1.71.56 2.61.68A2 2 0 0122 16.92z"/></svg></div>
+            <div><div class="k">Phone</div><div class="v">+91 87781 18782</div></div>
+          </div>
+          <div class="info-line">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></div>
+            <div><div class="k">Email</div><div class="v">vjservicescenter@gmail.com</div></div>
+          </div>
+          <div class="info-line">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="k">Address</div><div class="v">Gudiyatham, Vellore, Tamil Nadu - 632602</div></div>
+          </div>
+          <div class="info-line">
+            <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#E1503E" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+            <div><div class="k">Hours</div><div class="v">Mon–Sat, 10:00 AM – 7:00 PM</div></div>
+          </div>
+        </div>
+        <div class="avail-card">
+          <div class="k">Response time</div>
+          <div class="big">Usually same day</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="brand" style="align-items:flex-end;">
+        <div class="logo-mark">
+          <span class="logo-vj" style="color:#fff;">VJ</span>
+          <svg class="logo-swoosh" viewBox="0 0 100 18" preserveAspectRatio="none"><path d="M2 15C30 2 70 2 98 15" fill="none" stroke="#E1503E" stroke-width="3" stroke-linecap="round"/></svg>
+        </div>
+        <div class="brand-text" style="color:#fff;">PROJECT&amp;IT<span class="logo-solution">SOLUTION</span><span>Reliable IT solutions, built and fixed right.</span></div>
+      </div>
+      <div class="foot-links">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#services" data-page="services">Services</a>
+        <a href="#about" data-page="about">About</a>
+        <a href="#contact" data-page="contact">Contact</a>
+      </div>
+    </div>
+    <p class="copyright">© 2026 VJ Project &amp; IT Solution · Gudiyatham, Vellore, Tamil Nadu - 632602</p>
+  </div>
+</footer>
+
+<script>
+  const pages = ['home','services','about','contact'];
+  function showPage(name){
+    if(!pages.includes(name)) name = 'home';
+    pages.forEach(p=>{ document.getElementById('page-'+p).classList.toggle('visible', p===name); });
+    document.querySelectorAll('[data-page]').forEach(el=>{ el.classList.toggle('active', el.dataset.page===name); });
+    document.getElementById('mobileMenu').classList.remove('open');
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+  function routeFromHash(){ showPage(location.hash.replace('#','') || 'home'); }
+  window.addEventListener('hashchange', routeFromHash);
+  document.getElementById('hamburgerBtn').addEventListener('click', ()=>{
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  document.getElementById('contactForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const service = document.getElementById('fservice').value;
+    const details = document.getElementById('fmsg').value.trim();
+    const lines = [
+      'New request from the website:',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      `Service: ${service}`,
+      details ? `Details: ${details}` : ''
+    ].filter(Boolean);
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/918778118782?text=${message}`, '_blank');
+  });
+
+  document.getElementById('projectForm').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('pname').value.trim();
+    const phone = document.getElementById('pphone').value.trim();
+    const title = document.getElementById('ptitle').value.trim();
+    const category = document.getElementById('pcategory').value;
+    const language = document.getElementById('planguage').value.trim();
+    const type = document.querySelector('input[name="ptype"]:checked').value;
+    const deadline = document.getElementById('pdeadline').value;
+    const budget = document.getElementById('pbudget').value;
+    const docs = Array.from(document.querySelectorAll('#projectForm .radio-row input[type="checkbox"]:checked')).map(el=>el.value).join(', ');
+    const details = document.getElementById('pdetails').value.trim();
+    const lines = [
+      'New student project request:',
+      `Name: ${name}`,
+      `Phone: ${phone}`,
+      title ? `Title: ${title}` : 'Title: not decided yet',
+      `Category: ${category}`,
+      language ? `Language/stack: ${language}` : '',
+      `Type: ${type}`,
+      deadline ? `Deadline: ${deadline}` : '',
+      `Budget: ${budget}`,
+      docs ? `Documentation: ${docs}` : '',
+      details ? `Details: ${details}` : ''
+    ].filter(Boolean);
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/918778118782?text=${message}`, '_blank');
+  });
+  routeFromHash();
+</script>
+
+</body>
+</html>
